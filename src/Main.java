@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-// import App.TaskTracker;
 import CLI.CLI;
 import CLI.Command;
 import CLI.CLIAdapter;
@@ -19,7 +18,7 @@ public class Main {
         // add(new Command("remove", App::remove));
         // add(new Command("mark in-progress", App::markInProgress));
         // add(new Command("mark done", App::markDone));
-        add(new Command("list", CLIAdapter::list));
+        add(new Command("^list\\s*?$", CLIAdapter::list));
         // add(new Command("list done", App::listDone));
         // add(new Command("list todo", App::listTodo));
         // add(new Command("list in-progress", App::listInProgress));

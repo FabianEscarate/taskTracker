@@ -1,2 +1,5 @@
 # bin folder
 bin
+
+# local database
+localDatabase
