@@ -15,9 +15,6 @@ public class ProxyTaskRepository {
     } catch (Exception e) {
       System.out.println("Error in ProxyTaskRepository");
     }
-
-    fileRepository.loadDataIn(memRepository.getData());
-
   }
 
   public void add(Task newTask) {

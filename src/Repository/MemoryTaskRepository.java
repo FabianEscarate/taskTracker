@@ -16,7 +16,7 @@ public class MemoryTaskRepository {
   }
 
   public void update(int id, String newDescription) {
-    DATA.get(id).setDescription(newDescription);
+    // DATA.get(id).setDescription(newDescription);
   }
 
   public void remove(int id) {

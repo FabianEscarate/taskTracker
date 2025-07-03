@@ -39,7 +39,7 @@ public class CLIAdapter {
   // markInProgress
   // markDone
   public static void list(Optional<String[]> args){
-    App.TaskTracker.list();
+    // App.TaskTracker.list();
   }
   // listDone
   // listTodo
