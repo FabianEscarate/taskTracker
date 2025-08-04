@@ -39,19 +39,19 @@ public class CLIAdapter {
       System.out.println("No task description provided.");
       return;
     }
-    String[] arguments =  args.get();
-    int taskId =  Integer.parseInt(arguments[0]);
+    String[] arguments = args.get();
+    int taskId = Integer.parseInt(arguments[0]);
     App.TaskTracker.markInProgress(taskId);
   }
 
   public static void list(Optional<String[]> args) {
-    App.TaskTracker.list();
+    if (validateArguments(args)) {
+      App.TaskTracker.list(null);
+      return;
+    }
+
+    App.TaskTracker.list(args.get()[0]);
   }
 
-  // listDone
-  public static void listPending(Optional<String[]> args) {
-    App.TaskTracker.listPending();
-  }
-  // listInProgress
 
 }

@@ -50,16 +50,41 @@ public class ProxyTaskRepository implements IPortTaskTracker {
     return task;
   }
 
-  // public void remove(int id) {
-  // memRepository.remove(id);
-  // }
-
-  // public Task read(int id) {
-  // return memRepository.read(id);
-  // }
-
   public ArrayList<ITask> getAllTask() {
     List<String> taskLikeString = fileRepository.getAll();
+    ArrayList<ITask> dataToReturn = new ArrayList<ITask>();
+
+    for (String taskString : taskLikeString) {
+      dataToReturn.add(new IRepositoryTask(taskString));
+    }
+
+    return dataToReturn;
+  }
+
+  public ArrayList<ITask> getInProgressTask() {
+    List<String> taskLikeString = fileRepository.getRecordsByParameter("\"status\":\"IN_PROGRESS\"");
+    ArrayList<ITask> dataToReturn = new ArrayList<ITask>();
+
+    for (String taskString : taskLikeString) {
+      dataToReturn.add(new IRepositoryTask(taskString));
+    }
+
+    return dataToReturn;
+  }
+
+  public ArrayList<ITask> getPendingTask() {
+    List<String> taskLikeString = fileRepository.getRecordsByParameter("\\\"status\\\":\\\"PENDING\\\"");
+    ArrayList<ITask> dataToReturn = new ArrayList<ITask>();
+
+    for (String taskString : taskLikeString) {
+      dataToReturn.add(new IRepositoryTask(taskString));
+    }
+
+    return dataToReturn;
+  }
+
+  public ArrayList<ITask> getCompleteTask() {
+    List<String> taskLikeString = fileRepository.getRecordsByParameter("\"status\":\"COMPLETE\"");
     ArrayList<ITask> dataToReturn = new ArrayList<ITask>();
 
     for (String taskString : taskLikeString) {

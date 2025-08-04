@@ -128,4 +128,17 @@ public class FileTaskRepository implements IRepository {
 
     return true;
   }
+
+  public List<String> getRecordsByParameter(String query) {
+    List<String> records = new ArrayList<String>();
+    String fileContent = this.getContent();
+    Pattern pattern = Pattern.compile(String.format("\\{[a-zA-Z\",\\s:\\d]+%s[a-zA-Z\",:\\s\\d]+\\}", query));
+    Matcher matcher = pattern.matcher(fileContent);
+
+    while (matcher.find()) {
+      records.add(matcher.group(0));
+    }
+
+    return records;
+  }
 }

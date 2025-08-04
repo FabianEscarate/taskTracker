@@ -18,7 +18,7 @@ public class CLI {
         System.out.println("");
       }));
       add(new Command("^exit\s*?$", args -> {
-        System.out.println("Exiting the application. Goodbye!");
+        System.out.println("Closing the application. Goodbye!");
         System.exit(0);
       }));
     }
@@ -31,10 +31,10 @@ public class CLI {
   }
 
   public CLI(ArrayList<Command> commands) {
-      this.commands = this.defaultCommands;
-      for (Command command : commands) {
-        this.commands.add(command);
-      }
+    this.commands = this.defaultCommands;
+    for (Command command : commands) {
+      this.commands.add(command);
+    }
   }
 
   public void run() {
@@ -69,7 +69,10 @@ public class CLI {
     for (Command command : commands) {
       Matcher matcher = command.regex.matcher(input);
       if (matcher.matches()) {
-        command.action.run(input.isEmpty() ? Optional.empty() : matcher.groupCount() > 0 ? Optional.of(matcher.group(1).split("\\s+")) : Optional.empty());
+        command.action.run(input.isEmpty() ? Optional.empty()
+            : matcher.groupCount() > 0
+                ? matcher.group(1) != null ? Optional.of(matcher.group(1).trim().split("\\s+")) : Optional.empty()
+                : Optional.empty());
         return;
       }
     }

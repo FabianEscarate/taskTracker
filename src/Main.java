@@ -15,13 +15,8 @@ public class Main {
       {
         add(new Command("^add\\s+\"(?<taskDescription>[\\w\\d\\s\\.\\-ñ]+)\"$", CLIAdapter::add));
         add(new Command("^update\\s+(?<params>\\d+\\s+\"[\\w\\s+\\d\\.ñ]*\")$", CLIAdapter::update));
-        // add(new Command("remove", App::remove));
         add(new Command("^mark-in-progress\\s+?(?<params>\\d+)$", CLIAdapter::markInProgress));
-        // add(new Command("mark done", App::markDone));
-        add(new Command("^list\\s*?$", CLIAdapter::list));
-        // add(new Command("list done", App::listDone));
-        // add(new Command("^list\\s*?pending$", CLIAdapter::listPending));
-        // add(new Command("list in-progress", App::listInProgress));
+        add(new Command("^list\\s*(?<params>\\s+pending|\\s+completed|\\s+in_progress)?$", CLIAdapter::list));
       }
     };
 

@@ -49,20 +49,6 @@ public class TaskTracker {
     System.out.println(String.format("Task %d was updated with new description: %s", taskId, newDescription));
   }
 
-  // public static void remove(int taskId) {
-  // System.out.println("remove method called");
-
-  // if( taskId < 1){
-  // System.out.println("No Id to remove");
-  // return;
-  // }
-
-  // Task taskToRemove = taskRepository.read(taskId);
-  // taskRepository.remove(taskId);
-
-  // System.out.println(String.format("Task %d was removed", taskToRemove.id));
-  // }
-
   public static void markInProgress(int taskId) {
     ITask itask = taskRepository.getOneById(taskId);
     if (itask == null)
@@ -79,35 +65,22 @@ public class TaskTracker {
     System.out.println(String.format("Task %d marked to in progress", updatedTask.getId()));
   }
 
-  // public static void markDone() {
-  // System.out.println("markDone method called");
-  // }
+  public static void list(String status) {
+    ArrayList<ITask> taskByStatus = new ArrayList<>();
+    Status statusRequired = status == null ? null : Status.valueOf(status.toUpperCase());
+    if (statusRequired == null)
+      taskByStatus.addAll(taskRepository.getAllTask());
+    if (statusRequired == Status.IN_PROGRESS)
+      taskByStatus.addAll(taskRepository.getInProgressTask());
+    if (statusRequired == Status.PENDING)
+      taskByStatus.addAll(taskRepository.getPendingTask());
+    if (statusRequired == Status.COMPLETED)
+      taskByStatus.addAll(taskRepository.getCompleteTask());
 
-  public static void list() {
-    System.out.println("list method called");
     System.out.println(String.format("|%-7s|%12s|%25s|", "Number", "Status", "Description"));
-    for (ITask itask : taskRepository.getAllTask()) {
+    for (ITask itask : taskByStatus) {
       System.out.println(String.format("|%-7d|%12s|%25s|", itask.getId(), itask.getStatus(), itask.getDescription()));
     }
     System.out.println();
   }
-
-  // public static void listDone() {
-  // System.out.println("listDone method called");
-  // }
-
-  // public static void listPending() {
-  // System.out.println("listPending method called");
-  // System.out.println(String.format("|%-7s|%10s|%25s|", "Number", "Status",
-  // "Description"));
-  // for (ITask itask : taskRepository.getPedingTask()) {
-  // System.out.println(String.format("|%-7d|%10s|%25s|", itask.getId(),
-  // itask.getStatus(), itask.getDescription()));
-  // }
-  // System.out.println();
-  // }
-
-  // public static void listInProgress() {
-  // System.out.println("listInProgress method called");
-  // }
 }
