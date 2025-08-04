@@ -26,7 +26,7 @@ public class Task extends jsonExtension implements ITask{
     this.updateAt = updateAt;
   }
 
-  public Task(String description) {
+  public Task(Integer id, String description) {
     this.id = 0;
     this.description = description;
     this.status = Status.PENDING; // Default status

@@ -21,7 +21,7 @@ public class Command {
   }
 
   private static String extractCommandName(String regex) {
-    String COMMAND_NAME_REGEX =  "(?<commandName>[a-z]+)";
+    String COMMAND_NAME_REGEX =  "(?<commandName>[a-z\\-]+)";
     Pattern pattern = Pattern.compile(COMMAND_NAME_REGEX);
     Matcher matcher = pattern.matcher(regex);
     if (matcher.find()) {

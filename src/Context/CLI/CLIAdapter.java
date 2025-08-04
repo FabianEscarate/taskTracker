@@ -3,7 +3,6 @@ package Context.CLI;
 import java.util.Arrays;
 import java.util.Optional;
 
-
 public class CLIAdapter {
 
   private static boolean validateArguments(Optional<String[]> args) {
@@ -21,7 +20,6 @@ public class CLIAdapter {
       return;
     }
     String taskDescription = String.join(" ", args.get());
-    System.out.println("Adapter add method called with args: " + taskDescription);
     App.TaskTracker.add(taskDescription);
   }
 
@@ -30,22 +28,30 @@ public class CLIAdapter {
       System.out.println("No task description provided.");
       return;
     }
-    String [] arguments = args.get();
+    String[] arguments = args.get();
     int taskId = Integer.parseInt(arguments[0]);
     String newDescription = joinDescripiton(Arrays.copyOfRange(arguments, 1, arguments.length));
-    System.out.println("Adapter update method called wth args: " + String.join(", ", args.get()));
     App.TaskTracker.update(taskId, newDescription);
   }
 
-  // remove
-  // markInProgress
-  // markDone
+  public static void markInProgress(Optional<String[]> args) {
+    if (validateArguments(args)) {
+      System.out.println("No task description provided.");
+      return;
+    }
+    String[] arguments =  args.get();
+    int taskId =  Integer.parseInt(arguments[0]);
+    App.TaskTracker.markInProgress(taskId);
+  }
 
-  public static void list(Optional<String[]> args){
+  public static void list(Optional<String[]> args) {
     App.TaskTracker.list();
   }
+
   // listDone
-  // listTodo
+  public static void listPending(Optional<String[]> args) {
+    App.TaskTracker.listPending();
+  }
   // listInProgress
 
 }

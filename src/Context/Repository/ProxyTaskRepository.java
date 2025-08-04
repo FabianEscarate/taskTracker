@@ -27,19 +27,22 @@ public class ProxyTaskRepository implements IPortTaskTracker {
     fileRepository.add(taskJsonData);
   }
 
-  public ITask update(Integer id, String newDescription) {
+  public ITask getOneById(Integer id) {
     String jsonTask = fileRepository.getOneById(id);
     if (jsonTask == null) {
       System.out.println("Tarea no encontrada");
       return null;
     }
 
+    return new IRepositoryTask(jsonTask);
+  }
+
+  public ITask update(Integer id, String jsonTask) {
     IRepositoryTask task = new IRepositoryTask(jsonTask);
-    task.setDescription(newDescription);
     task.setUpdateAt(new Date());
 
     Boolean result = fileRepository.update(id, task.toJson());
-    if(!result){
+    if (!result) {
       System.out.println("Tarea no actualizada");
       return null;
     }
