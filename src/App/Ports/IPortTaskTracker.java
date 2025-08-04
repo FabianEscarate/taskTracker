@@ -6,4 +6,5 @@ import java.util.ArrayList;
 public interface IPortTaskTracker {
   public void add(String taskJsonData);
   public ArrayList<ITask> getAllTask();
+  public ITask update(Integer id, String newDescription);
 }

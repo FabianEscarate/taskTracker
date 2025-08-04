@@ -1,8 +1,6 @@
 package App;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import App.Domain.Task;
 import App.Ports.IPortTaskTracker;
 import App.Ports.ITask;
@@ -27,19 +25,22 @@ public class TaskTracker {
     System.out.println("Task added: " + taskDescription);
   }
 
-  // public static void update(int taskId, String newDescription) {
-  // System.out.println("update method called");
+  public static void update(int taskId, String newDescription) {
+    System.out.println("update method called");
 
-  // if(newDescription.isEmpty()){
-  // System.out.println("No new task description provided.");
-  // return;
-  // }
+    if (newDescription.isEmpty()) {
+      System.out.println("No new task description provided.");
+      return;
+    }
 
-  // taskRepository.update(taskId, newDescription);
+    ITask updatedTask = taskRepository.update(taskId, newDescription);
+    if (updatedTask == null) {
+      System.out.println("Can't update task");
+      return;
+    }
 
-  // System.out.println(String.format("Task %d was updated with new description:
-  // %s", taskId, newDescription));
-  // }
+    System.out.println(String.format("Task %d was updated with new description: %s", taskId, newDescription));
+  }
 
   // public static void remove(int taskId) {
   // System.out.println("remove method called");

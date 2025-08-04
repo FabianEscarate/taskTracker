@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Context.Repository.Interfaces.IRepository;
+
 public class FileTaskRepository implements IRepository {
   private String emptyFile = "[]";
   private String currentPath = System.getProperty("user.dir");
@@ -19,12 +21,12 @@ public class FileTaskRepository implements IRepository {
   private String AbsolutePathFile = String.format("%s%s%s", currentPath, PATH_FILE, FILE_NAME);
   private Integer lengthString;
 
-  private String getContent(){
+  private String getContent() {
     try {
       return Files.readString(Paths.get(this.AbsolutePathFile));
-    }catch(Exception e){
+    } catch (Exception e) {
       System.out.println("Error to write file");
-    }catch(OutOfMemoryError e){
+    } catch (OutOfMemoryError e) {
       System.out.println("Time to move persistand data to database please.");
     }
 
@@ -94,5 +96,36 @@ public class FileTaskRepository implements IRepository {
     }
 
     return allData;
+  }
+
+  public String getOneById(Integer id) {
+    String finded = "";
+    String fileContent = this.getContent();
+    Pattern pattern = Pattern.compile(String.format("\\{\"id\":%d,.*?\\}", id));
+    Matcher matcher = pattern.matcher(fileContent);
+
+    while (matcher.find()) {
+      finded = matcher.group(0);
+    }
+
+    return finded;
+  }
+
+  public Boolean update(Integer id, String jsonTask) {
+    String fileContent = this.getContent();
+    Pattern pattern = Pattern.compile(String.format("\\{\"id\":%d,.*?\\}", id));
+    Matcher matcher = pattern.matcher(fileContent);
+
+    String newContent = matcher.replaceAll(jsonTask);
+    try {
+      Files.writeString(Paths.get(this.AbsolutePathFile), String.format("%s", newContent));
+      setLengthString();
+    } catch (Exception e) {
+      System.out.println("Error to write file");
+      System.out.println(e);
+      return false;
+    }
+
+    return true;
   }
 }

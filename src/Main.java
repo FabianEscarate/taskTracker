@@ -15,7 +15,7 @@ public class Main {
     ArrayList<Command> commands = new ArrayList<Command>() {
       {
         add(new Command("^add\\s+\"(?<taskDescription>[\\w\\d\\s\\.\\-ñ]+)\"$", CLIAdapter::add));
-        // add(new Command("^update\\s+(?<params>\\d+\\s+\"[\\w\\s+\\d\\.ñ]*\")$", CLIAdapter::update));
+        add(new Command("^update\\s+(?<params>\\d+\\s+\"[\\w\\s+\\d\\.ñ]*\")$", CLIAdapter::update));
         // add(new Command("remove", App::remove));
         // add(new Command("mark in-progress", App::markInProgress));
         // add(new Command("mark done", App::markDone));

@@ -1,4 +1,4 @@
-package Context.Repository;
+package Context.Repository.Interfaces;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import App.Ports.ITask;
 import utils.DateFormats;
+import utils.jsonExtension;
 
 enum Status {
   PENDING, IN_PROGRESS, COMPLETED
@@ -16,7 +17,7 @@ enum IRepositoryTaskFields {
   id, description, status, createAt, updateAt
 }
 
-public class IRepositoryTask implements ITask {
+public class IRepositoryTask extends jsonExtension implements ITask {
   private Integer id;
   private String description;
   private Status status;
