@@ -1,4 +1,4 @@
-package Repository;
+package Context.Repository;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,20 +6,29 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import Entities.Task;
-
-public class FileTaskRepository {
+public class FileTaskRepository implements IRepository {
   private String emptyFile = "[]";
   private String currentPath = System.getProperty("user.dir");
   private String PATH_FILE = "/localDatabase";
   private String FILE_NAME = "/data.json";
-  private Boolean exists;
+  private String AbsolutePathFile = String.format("%s%s%s", currentPath, PATH_FILE, FILE_NAME);
   private Integer lengthString;
 
-  private String getAbsotutePath() {
-    return String.format("%s%s%s", currentPath, PATH_FILE, FILE_NAME);
+  private String getContent(){
+    try {
+      return Files.readString(Paths.get(this.AbsolutePathFile));
+    }catch(Exception e){
+      System.out.println("Error to write file");
+    }catch(OutOfMemoryError e){
+      System.out.println("Time to move persistand data to database please.");
+    }
+
+    return null;
   }
 
   private void createFile() throws FileSystemException {
@@ -31,7 +40,7 @@ public class FileTaskRepository {
         throw new FileSystemException(String.format("Cant create %s folders", this.PATH_FILE));
       }
     }
-    File jsonFile = new File(getAbsotutePath());
+    File jsonFile = new File(this.AbsolutePathFile);
     if (!jsonFile.exists()) {
       try {
         Files.write(jsonFile.toPath(), this.emptyFile.getBytes(StandardCharsets.UTF_8));
@@ -45,7 +54,7 @@ public class FileTaskRepository {
   }
 
   private void setLengthString() throws IOException {
-    this.lengthString = Files.readString(Paths.get(getAbsotutePath())).length();
+    this.lengthString = Files.readString(Paths.get(this.AbsolutePathFile)).length();
   }
 
   public FileTaskRepository() throws IOException {
@@ -53,23 +62,17 @@ public class FileTaskRepository {
     if (!fileDatabase.exists()) {
       createFile();
     }
-    this.exists = true;
     setLengthString();
   }
 
-  public void add(Task newTask) {
+  public void add(String jsonTask) {
     try {
-      String currentContent = Files.readString(Paths.get(getAbsotutePath()));
-      
-      Files.writeString(
-        Paths.get(getAbsotutePath()), 
-        String.format("%s%s%s", 
-          currentContent.substring(0, this.lengthString - 1),
-          this.lengthString < 5 ? newTask.toJson() : String.format(",%s", newTask.toJson()),
-          "]"
-        )
-      );
-        
+      String currentContent = Files.readString(Paths.get(this.AbsolutePathFile));
+
+      Files.writeString(Paths.get(this.AbsolutePathFile),
+          String.format("%s%s%s", currentContent.substring(0, this.lengthString - 1),
+              this.lengthString < 5 ? jsonTask : String.format(",%s", jsonTask), "]"));
+
       setLengthString();
     } catch (Exception e) {
       System.out.println("Error to write file");
@@ -78,5 +81,18 @@ public class FileTaskRepository {
       System.out.println("Time to move persistand data to database please.");
 
     }
+  }
+
+  public List<String> getAll() {
+    List<String> allData = new ArrayList<String>();
+    String fileContent = this.getContent();
+    Pattern pattern = Pattern.compile("\\{.*?\\}");
+    Matcher matcher = pattern.matcher(fileContent);
+
+    while (matcher.find()) {
+      allData.add(matcher.group(0));
+    }
+
+    return allData;
   }
 }

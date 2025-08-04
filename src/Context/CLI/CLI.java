@@ -1,4 +1,4 @@
-package CLI;
+package Context.CLI;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

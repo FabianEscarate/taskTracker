@@ -36,4 +36,8 @@ public class jsonExtension {
     json.append("}");
     return json.toString();
   }
+
+  public static<T> T jsonToObject(String json) throws Exception {
+    throw new Exception("No Implemented");
+  }
 }
