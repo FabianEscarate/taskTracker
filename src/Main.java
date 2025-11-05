@@ -3,12 +3,14 @@ import java.util.ArrayList;
 import Context.CLI.CLI;
 import Context.CLI.CLIAdapter;
 import Context.CLI.Command;
-
+import Context.Web.WebApi;
+import Context.Web.WebPage;
 public class Main {
 
   String APP_NAME = "Task Tracker";
   String VERSION = "1.0.0";
 
+  @SuppressWarnings("unused")
   public static void main(String[] args) throws Exception {
 
     ArrayList<Command> commands = new ArrayList<Command>() {
@@ -22,7 +24,12 @@ public class Main {
 
     CLI cli = new CLI(commands);
 
-    cli.run();
+    if(false){
+      cli.run();
+    }
+
+    WebPage.run();
+    WebApi.run();
 
   }
 }
