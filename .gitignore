@@ -3,3 +3,6 @@ bin
 
 # local database
 localDatabase
+
+# maven target folder
+target
