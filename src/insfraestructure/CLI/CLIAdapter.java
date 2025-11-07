@@ -1,4 +1,4 @@
-package Context.CLI;
+package insfraestructure.CLI;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -20,7 +20,7 @@ public class CLIAdapter {
       return;
     }
     String taskDescription = String.join(" ", args.get());
-    App.TaskTracker.add(taskDescription);
+    Business.TaskTracker.add(taskDescription);
   }
 
   public static void update(Optional<String[]> args) {
@@ -31,7 +31,7 @@ public class CLIAdapter {
     String[] arguments = args.get();
     int taskId = Integer.parseInt(arguments[0]);
     String newDescription = joinDescripiton(Arrays.copyOfRange(arguments, 1, arguments.length));
-    App.TaskTracker.update(taskId, newDescription);
+    Business.TaskTracker.update(taskId, newDescription);
   }
 
   public static void markInProgress(Optional<String[]> args) {
@@ -41,16 +41,16 @@ public class CLIAdapter {
     }
     String[] arguments = args.get();
     int taskId = Integer.parseInt(arguments[0]);
-    App.TaskTracker.markInProgress(taskId);
+    Business.TaskTracker.markInProgress(taskId);
   }
 
   public static void list(Optional<String[]> args) {
     if (validateArguments(args)) {
-      App.TaskTracker.list(null);
+      Business.TaskTracker.list(null);
       return;
     }
 
-    App.TaskTracker.list(args.get()[0]);
+    Business.TaskTracker.list(args.get()[0]);
   }
 
 

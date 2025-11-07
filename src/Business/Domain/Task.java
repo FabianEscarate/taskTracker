@@ -1,7 +1,8 @@
-package App.Domain;
+package Business.Domain;
 
 import java.util.Date;
-import App.Ports.ITask;
+
+import Business.Ports.ITask;
 import utils.jsonExtension;
 
 enum TaskFields {

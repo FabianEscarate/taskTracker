@@ -1,4 +1,4 @@
-package App.Domain;
+package Business.Domain;
 
 public enum Status {
   PENDING,

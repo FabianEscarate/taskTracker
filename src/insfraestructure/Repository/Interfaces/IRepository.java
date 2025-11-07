@@ -1,4 +1,4 @@
-package Context.Repository.Interfaces;
+package insfraestructure.Repository.Interfaces;
 
 import java.util.List;
 

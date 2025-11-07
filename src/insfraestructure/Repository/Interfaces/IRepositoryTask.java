@@ -1,11 +1,12 @@
-package Context.Repository.Interfaces;
+package insfraestructure.Repository.Interfaces;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import App.Ports.ITask;
+
+import Business.Ports.ITask;
 import utils.DateFormats;
 import utils.jsonExtension;
 

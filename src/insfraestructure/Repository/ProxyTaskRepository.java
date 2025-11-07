@@ -1,13 +1,13 @@
-package Context.Repository;
+package insfraestructure.Repository;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import App.Ports.IPortTaskTracker;
-import App.Ports.ITask;
-import Context.Repository.Interfaces.IRepository;
-import Context.Repository.Interfaces.IRepositoryTask;
+import Business.Ports.IPortTaskTracker;
+import Business.Ports.ITask;
+import insfraestructure.Repository.Interfaces.IRepository;
+import insfraestructure.Repository.Interfaces.IRepositoryTask;
 
 public class ProxyTaskRepository implements IPortTaskTracker {
 

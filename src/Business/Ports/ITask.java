@@ -1,7 +1,8 @@
-package App.Ports;
+package Business.Ports;
 
 import java.util.Date;
-import App.Domain.Status;
+
+import Business.Domain.Status;
 
 public interface ITask {
   Integer id = null;
