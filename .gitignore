@@ -1,6 +1,10 @@
 # bin folder
 bin
 
+# Environment files
+.env
+.env.local
+
 # local database
 localDatabase
 
