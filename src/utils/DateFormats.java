@@ -11,7 +11,7 @@ public class DateFormats {
       SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
       return sdf.parse(dateString);
     }catch(Exception e){
-      System.out.println("Error al parsear fecha");
+      System.out.println("Error parsing date: " + dateString);
       return null;
     }
   }

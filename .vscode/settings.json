@@ -8,5 +8,12 @@
     ],
     "java.debug.settings.onBuildFailureProceed": true,
     "java.format.settings.url": ".vscode/java-formatter.xml",
-    "java.search.scope": "main"
+    "java.search.scope": "main",
+    "[java]": {
+      "editor.tabSize": 2
+    },
+    "maven.executable.path": "/usr/bin/mvn",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.import.gradle.enabled": false,
+    "java.import.maven.enabled": true
 }
