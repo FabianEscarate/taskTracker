@@ -1,4 +1,4 @@
-package Context.Web;
+package insfraestructure.Web;
 
 import spark.Service;
 public class WebPage {

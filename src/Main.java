@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-import Context.CLI.CLI;
-import Context.CLI.CLIAdapter;
-import Context.CLI.Command;
-import Context.Web.WebApi;
-import Context.Web.WebPage;
+import insfraestructure.CLI.CLI;
+import insfraestructure.CLI.CLIAdapter;
+import insfraestructure.CLI.Command;
+import insfraestructure.Web.WebApi;
+import insfraestructure.Web.WebPage;
 public class Main {
 
   String APP_NAME = "Task Tracker";

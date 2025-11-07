@@ -1,8 +1,8 @@
-package Context.Repository;
+package insfraestructure.Repository;
 
 import java.util.ArrayList;
 
-import App.Domain.Task;
+import Business.Domain.Task;
 
 public class MemoryTaskRepository {
 

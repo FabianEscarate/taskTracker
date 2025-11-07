@@ -1,11 +1,12 @@
-package App;
+package Business;
 
 import java.util.ArrayList;
-import App.Domain.Status;
-import App.Domain.Task;
-import App.Ports.IPortTaskTracker;
-import App.Ports.ITask;
-import Context.Repository.ProxyTaskRepository;
+
+import Business.Domain.Status;
+import Business.Domain.Task;
+import Business.Ports.IPortTaskTracker;
+import Business.Ports.ITask;
+import insfraestructure.Repository.ProxyTaskRepository;
 
 public class TaskTracker {
 
